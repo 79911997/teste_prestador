@@ -117,7 +117,7 @@ describe("Servico", () => {
     
         describe("Servico", () => {
     
-            test("Servico", async () => {
+            test("servico", async () => {
                 await Servico.bulkCreate([
                     {
                         name: "servicos Teste",
@@ -139,9 +139,9 @@ describe("Servico", () => {
                     }
                 ]);
     
-                const servico = await servico.findAll();
+                const servico = await Servico.findAll();
     
-                expect(servico.length).toBe(3);
+                expect(servico.length).toBe(4);
                 
             });
     
@@ -158,32 +158,32 @@ describe("Servico", () => {
                 expect(servico).not.toBeNull();
                 expect(servico).toBeDefined();
     
-                await expect(servico.create({
+                await expect(Servico.create({
                     tipo: "faxina"
                 })).rejects.toThrow();
     
-                await expect(servico.create({
+                await expect(Servico.create({
                     name: "",
                     tipo: "",
                     valor: "",
                     disponibilidade: ""
                 })).rejects.toThrow();
     
-                await expect(servico.create({
+                await expect(Servico.create({
                     name: "",
                     tipo: "projeto",
                     valor: "",
                     disponibilidade: ""
                 })).rejects.toThrow();
     
-                await expect(servico.create({
+                await expect(Servico.create({
                     name: "",
                     tipo: "",
                     valor: "120",
                     disponibilidade: ""
                 })).rejects.toThrow();
     
-                await expect(servico.create({})).rejects.toThrow();
+                await expect(Servico.create({})).rejects.toThrow();
     
             });
     
@@ -198,7 +198,7 @@ describe("Servico", () => {
                 servico.tipo = "manutencao";
                 await expect(servico.save()).resolves.toBeTruthy();
     
-                const servico2 = await Usuario.findOne({
+                const servico2 = await Servico.findOne({
                     where: {
                         id: servico.id
                     }
